@@ -1,0 +1,9 @@
+Cheetah3
+configobj
+paho-mqtt
+Pillow
+pyephem
+pyserial
+pyusb
+setuptools
+wheel
