@@ -1,7 +1,7 @@
 FROM python:3 as stage-1
 
 ENV WEEWX_HOME="/home/weewx"
-ENV ARCHIVE="weewx-4.7.0.tar.gz"
+ENV ARCHIVE="weewx-4.8.0.tar.gz"
 
 RUN addgroup --system --gid 421 weewx &&\
   adduser --system --uid 421 --ingroup weewx weewx
