@@ -11,6 +11,11 @@ RUN addgroup --system --gid 421 weewx &&\
 WORKDIR /tmp
 COPY requirements.txt ./
 
+# Python setup
+RUN python -m venv /opt/venv
+ENV PATH="/opt/venv/bin:$PATH"
+RUN pip install --no-cache-dir --requirement requirements.txt
+
 # WeeWX setup
 RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
   wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip &&\
@@ -21,11 +26,6 @@ RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARC
   mkdir weewx-wdc && unzip weewx-wdc.zip -d weewx-wdc &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
-# Python setup
-RUN python -m venv /opt/venv
-ENV PATH="/opt/venv/bin:$PATH"
-RUN pip install --no-cache-dir --requirement requirements.txt
-
 WORKDIR ${WEEWX_HOME}
 
 RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
@@ -33,6 +33,7 @@ RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
   bin/wee_extension --install /tmp/neowx-material.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc &&\
   mkdir user
+
 COPY entrypoint.sh ./
 COPY user/ ./bin/user/
 

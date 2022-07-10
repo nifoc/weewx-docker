@@ -28,6 +28,11 @@ if [ "$(id -u)" = 0 ]; then
     ln -s /data/neowx-material-skin.conf ./skins/neowx-material/skin.conf
   fi
 
+  if [ -e /data/weewx-wdc-skin.conf ]; then
+    rm -f ./skins/weewx-wdc/skin.conf
+    ln -s /data/weewx-wdc-skin.conf ./skins/weewx-wdc/skin.conf
+  fi
+
   if [ "${WEEWX_UID:-weewx}" != 0 ]; then
     # drop privileges and restart this script
     echo "Switching uid:gid to ${WEEWX_UID:-weewx}:${WEEWX_GID:-weewx}"
