@@ -14,6 +14,7 @@ COPY requirements.txt ./
 # WeeWX setup
 RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
   wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip &&\
+  wget -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
   wget -O neowx-material.zip https://neoground.com/projects/neowx-material/download/${NEOWX_VERSION} &&\
   wget -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WDC_VERSION}/weewx-wdc-${WDC_VERSION}.zip &&\
   tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file "${ARCHIVE}" &&\
@@ -28,6 +29,7 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 WORKDIR ${WEEWX_HOME}
 
 RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
+  bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/neowx-material.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc &&\
   mkdir user
