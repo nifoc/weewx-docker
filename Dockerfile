@@ -17,6 +17,7 @@ RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARC
   wget -O neowx-material.zip https://neoground.com/projects/neowx-material/download/${NEOWX_VERSION} &&\
   wget -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WDC_VERSION}/weewx-wdc-${WDC_VERSION}.zip &&\
   tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file "${ARCHIVE}" &&\
+  mkdir weewx-wdc && unzip weewx-wdc.zip -d weewx-wdc &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
 # Python setup
@@ -28,7 +29,7 @@ WORKDIR ${WEEWX_HOME}
 
 RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
   bin/wee_extension --install /tmp/neowx-material.zip &&\
-  bin/wee_extension --install /tmp/weewx-wdc.zip &&\
+  bin/wee_extension --install /tmp/weewx-wdc &&\
   mkdir user
 COPY entrypoint.sh ./
 COPY user/ ./bin/user/
