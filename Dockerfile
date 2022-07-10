@@ -2,6 +2,8 @@ FROM python:3 as stage-1
 
 ENV WEEWX_HOME="/home/weewx"
 ENV ARCHIVE="weewx-4.8.0.tar.gz"
+ENV NEOWX_VERSION="latest"
+ENV WDC_VERSION="v1.3.1"
 
 RUN addgroup --system --gid 421 weewx &&\
   adduser --system --uid 421 --ingroup weewx weewx
@@ -12,7 +14,8 @@ COPY requirements.txt ./
 # WeeWX setup
 RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
   wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip &&\
-  wget -O neowx-material-latest.zip https://neoground.com/projects/neowx-material/download/latest &&\
+  wget -O neowx-material.zip https://neoground.com/projects/neowx-material/download/${NEOWX_VERSION} &&\
+  wget -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WDC_VERSION}/weewx-wdc-${WDC_VERSION}.zip &&\
   tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file "${ARCHIVE}" &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
@@ -24,7 +27,8 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 WORKDIR ${WEEWX_HOME}
 
 RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
-  bin/wee_extension --install /tmp/neowx-material-latest.zip &&\
+  bin/wee_extension --install /tmp/neowx-material.zip &&\
+  bin/wee_extension --install /tmp/weewx-wdc.zip &&\
   mkdir user
 COPY entrypoint.sh ./
 COPY user/ ./bin/user/
