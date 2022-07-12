@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 
 # WeeWX setup
 RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
-  wget -O weewx-interceptor.zip https://github.com/matthewwall/weewx-interceptor/archive/master.zip &&\
+  wget -O weewx-interceptor.zip https://github.com/nifoc/weewx-interceptor/archive/refs/heads/feature/ecowitt-fields.zip &&\
   wget -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
   wget -O neowx-material.zip https://neoground.com/projects/neowx-material/download/${NEOWX_VERSION} &&\
   wget -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WDC_VERSION}/weewx-wdc-${WDC_VERSION}.zip &&\
