@@ -23,11 +23,6 @@ if [ "$(id -u)" = 0 ]; then
   nginx -c /data/nginx.conf
 
   # skin config
-  if [ -e /data/neowx-material-skin.conf ]; then
-    rm -f ./skins/neowx-material/skin.conf
-    ln -s /data/neowx-material-skin.conf ./skins/neowx-material/skin.conf
-  fi
-
   if [ -e /data/weewx-wdc-skin.conf ]; then
     rm -f ./skins/weewx-wdc/skin.conf
     ln -s /data/weewx-wdc-skin.conf ./skins/weewx-wdc/skin.conf
