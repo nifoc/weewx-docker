@@ -15,6 +15,7 @@ RUN apt-get update -qq -y &&\
   build-essential \
   unzip \
   wget \
+  libjpeg62-turbo-dev \
   zlib1g-dev \
   -qq -y --no-install-recommends &&\
   rm -rf /var/lib/apt/lists/*
@@ -60,6 +61,7 @@ RUN apt-get update -qq -y &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
   libusb-1.0-0 \
   zlib1g \
+  libjpeg62-turbo \
   gosu \
   busybox-syslogd \
   tzdata \
