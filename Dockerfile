@@ -15,6 +15,7 @@ RUN apt-get update -qq -y &&\
   build-essential \
   unzip \
   wget \
+  zlib1g-dev \
   -qq -y --no-install-recommends &&\
   rm -rf /var/lib/apt/lists/*
 
@@ -58,6 +59,7 @@ RUN addgroup --system --gid ${WEEWX_UID} weewx \
 RUN apt-get update -qq -y &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
   libusb-1.0-0 \
+  zlib1g \
   gosu \
   busybox-syslogd \
   tzdata \
