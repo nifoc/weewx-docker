@@ -12,7 +12,9 @@ RUN addgroup --system --gid ${WEEWX_UID} weewx \
 # Install installation dependencies
 RUN apt-get update -qq -y &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
-  wget -qq -y --no-install-recommends &&\
+  unzip \
+  wget \
+  -qq -y --no-install-recommends &&\
   rm -rf /var/lib/apt/lists/*
 
 WORKDIR /tmp
@@ -58,7 +60,8 @@ RUN apt-get update -qq -y &&\
   gosu \
   busybox-syslogd \
   tzdata \
-  nginx-light -qq -y --no-install-recommends &&\
+  nginx-light \
+  -qq -y --no-install-recommends &&\
   rm -rf /var/lib/apt/lists/*
 
 # Copy installation from install stage
