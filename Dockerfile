@@ -9,6 +9,12 @@ ENV WEEWX_WDC_VERSION="v1.3.1"
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
 
+# Install installation dependencies
+RUN apt-get update -qq -y &&\
+  DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  wget -qq -y --no-install-recommends &&\
+  rm -rf /var/lib/apt/lists/*
+
 WORKDIR /tmp
 COPY requirements.txt ./
 
