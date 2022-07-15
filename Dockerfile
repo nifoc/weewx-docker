@@ -12,6 +12,7 @@ RUN addgroup --system --gid ${WEEWX_UID} weewx \
 # Install installation dependencies
 RUN apt-get update -qq -y &&\
   DEBIAN_FRONTEND=noninteractive apt-get install -y \
+  build-essential \
   unzip \
   wget \
   -qq -y --no-install-recommends &&\
