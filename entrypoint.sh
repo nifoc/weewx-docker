@@ -14,13 +14,15 @@ fi
 
 if [ "$(id -u)" = 0 ]; then
   # set timezone using environment
-  ln -snf /usr/share/zoneinfo/"${TIMEZONE:-UTC}" /etc/localtime
+  ln -snf /usr/share/zoneinfo/"${TZ:-UTC}" /etc/localtime
 
   # start the syslog daemon as root
   /sbin/syslogd -n -S -O - &
 
   # start nginx
-  nginx -c /data/nginx.conf
+  if [ -e /data/nginx.conf ]; then
+    nginx -c /data/nginx.conf
+  fi
 
   # skin config
   if [ -e /data/weewx-wdc-skin.conf ]; then
