@@ -21,3 +21,6 @@ import weewx.units
 
 weewx.units.obs_group_dict['soilMoist1'] = 'group_percent'
 weewx.units.obs_group_dict['luminosity'] = 'group_illuminance'
+
+weewx.units.obs_group_dict['soilMoistBatteryVoltage1'] = 'group_volt'
+weewx.units.obs_group_dict['soilTempBatteryVoltage1'] = 'group_volt'
