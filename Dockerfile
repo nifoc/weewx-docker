@@ -44,13 +44,16 @@ RUN tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file
 RUN chown -R weewx:weewx ${WEEWX_HOME}
 WORKDIR ${WEEWX_HOME}
 RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
-  bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
+  MQTTSubscribe_install_type=DRIVER bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc &&\
   mkdir user
 COPY entrypoint.sh ./
 COPY --chown=weewx:weewx user/ ./bin/user/
+
+RUN "echo 'Default Configuration:'" &&\
+  cat ${WEEWX_HOME}/weewx.conf
 
 FROM python:3.10.5-slim-bullseye as final
 
