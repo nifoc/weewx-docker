@@ -43,14 +43,16 @@ RUN tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file
 # weewx setup
 RUN chown -R weewx:weewx ${WEEWX_HOME}
 WORKDIR ${WEEWX_HOME}
-RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
-  MQTTSubscribe_install_type=DRIVER bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
+RUN mkdir ${WEEWX_HOME}/user &&\
+  chown weewx:weewx ${WEEWX_HOME}/user &&\
+  bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
+  bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
-  bin/wee_extension --install /tmp/weewx-wdc &&\
-  mkdir user
+  bin/wee_extension --install /tmp/weewx-wdc
+
 COPY entrypoint.sh ./
-COPY --chown=weewx:weewx user/ ./bin/user/
+COPY --chown=weewx:weewx user/extensions.py ./bin/user/extensions.py
 
 RUN echo 'Default Configuration:' &&\
   cat ${WEEWX_HOME}/weewx.conf
