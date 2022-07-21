@@ -52,7 +52,7 @@ RUN bin/wee_extension --install /tmp/weewx-interceptor.zip &&\
 COPY entrypoint.sh ./
 COPY --chown=weewx:weewx user/ ./bin/user/
 
-RUN "echo 'Default Configuration:'" &&\
+RUN echo 'Default Configuration:' &&\
   cat ${WEEWX_HOME}/weewx.conf
 
 FROM python:3.10.5-slim-bullseye as final
