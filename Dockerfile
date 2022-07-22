@@ -4,7 +4,7 @@ ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
 ENV WEEWX_VERSION="4.8.0"
 ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
-ENV WEEWX_WDC_VERSION="v1.3.1"
+ENV WEEWX_WDC_VERSION="v1.3.3"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
