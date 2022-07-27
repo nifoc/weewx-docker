@@ -42,9 +42,7 @@ RUN tar --extract --gunzip --directory ${WEEWX_HOME} --strip-components=1 --file
 # weewx setup
 RUN chown -R weewx:weewx ${WEEWX_HOME}
 WORKDIR ${WEEWX_HOME}
-RUN mkdir ${WEEWX_HOME}/user &&\
-  chown weewx:weewx ${WEEWX_HOME}/user &&\
-  bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
+RUN bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc
@@ -81,6 +79,7 @@ RUN apt-get update -qq -y &&\
 WORKDIR ${WEEWX_HOME}
 COPY --from=install /opt/venv /opt/venv
 COPY --from=install ${WEEWX_HOME} ${WEEWX_HOME}
+COPY --chown=weewx:weewx defaults/ /defaults
 
 RUN mkdir /data && \
   cp weewx.conf /data

@@ -22,12 +22,16 @@ if [ "$(id -u)" = 0 ]; then
   # start nginx
   if [ -e /data/nginx.conf ]; then
     nginx -c /data/nginx.conf
+  else
+    nginx -c /defaults/nginx.conf
   fi
 
   # skin config
-  if [ -e /data/weewx-wdc-skin.conf ]; then
-    rm -f ./skins/weewx-wdc/skin.conf
-    ln -s /data/weewx-wdc-skin.conf ./skins/weewx-wdc/skin.conf
+  rm -f ./skins/weewx-wdc/skin.conf
+  if [ -e /data/skin-wdc/skin.conf ]; then
+    ln -s /data/skin-wdc/skin.conf ./skins/weewx-wdc/skin.conf
+  else
+    ln -s /defaults/skin-wdc/skin.conf ./skins/weewx-wdc/skin.conf
   fi
 
   if [ "${WEEWX_UID:-weewx}" != 0 ]; then
