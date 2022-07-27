@@ -26,7 +26,7 @@ if [ "$(id -u)" = 0 ]; then
     nginx -c /defaults/nginx.conf
   fi
 
-  # skin config
+  # skin config: WDC
   rm -f ./skins/weewx-wdc/skin.conf
   if [ -e /data/skin-wdc/skin.conf ]; then
     ln -s /data/skin-wdc/skin.conf ./skins/weewx-wdc/skin.conf
