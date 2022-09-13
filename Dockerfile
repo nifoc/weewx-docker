@@ -33,6 +33,7 @@ RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARC
   wget -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/master.zip &&\
   wget -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
   wget -O weewx-GTS.zip https://github.com/roe-dl/weewx-GTS/archive/master.zip &&\
+  wget -O weewx-purpleair.zip https://github.com/xslima00/weewx-purpleair/archive/refs/heads/patch-1.zip &&\
   wget -O weewx-aqi.zip https://github.com/jonathankoren/weewx-aqi/archive/refs/tags/v1.4.zip &&\
   wget -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WEEWX_WDC_VERSION}/weewx-wdc-${WEEWX_WDC_VERSION}.zip
 
@@ -46,6 +47,7 @@ WORKDIR ${WEEWX_HOME}
 RUN bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
+  bin/wee_extension --install /tmp/weewx-purpleair.zip &&\
   bin/wee_extension --install /tmp/weewx-aqi.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc
 
