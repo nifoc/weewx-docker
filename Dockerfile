@@ -4,7 +4,7 @@ ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
 ENV WEEWX_VERSION="4.8.0"
 ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
-ENV WEEWX_WDC_VERSION="v2.2.1"
+ENV WEEWX_WDC_VERSION="v2.3.0"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
@@ -30,7 +30,7 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 
 # Download weewx and plugins
 RUN wget -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
-  wget -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/master.zip &&\
+  wget -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/refs/tags/v2.2.2.zip &&\
   wget -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
   wget -O weewx-GTS.zip https://github.com/roe-dl/weewx-GTS/archive/master.zip &&\
   wget -O weewx-purpleair.zip https://github.com/xslima00/weewx-purpleair/archive/refs/heads/patch-1.zip &&\
