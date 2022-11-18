@@ -1,4 +1,4 @@
-FROM python:3.10.5-slim-bullseye as install
+FROM python:3.10.8-slim-bullseye as install
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
@@ -58,7 +58,7 @@ COPY --chown=weewx:weewx user/extensions.py ./bin/user/extensions.py
 RUN echo 'Default Configuration:' &&\
   cat ${WEEWX_HOME}/weewx.conf
 
-FROM python:3.10.5-slim-bullseye as final
+FROM python:3.10.8-slim-bullseye as final
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
