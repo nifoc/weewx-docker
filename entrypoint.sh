@@ -34,6 +34,9 @@ if [ "$(id -u)" = 0 ]; then
   fi
   chmod +x /etc/cron.hourly/*
 
+  # run cron tasks on startup
+  /etc/cron.hourly/dwd || true
+
   # skin config: WDC
   rm -f ./skins/weewx-wdc/skin.conf
   if [ -e /data/skin-wdc/skin.conf ]; then
