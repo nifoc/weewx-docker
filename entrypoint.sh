@@ -26,6 +26,14 @@ if [ "$(id -u)" = 0 ]; then
     nginx -c /defaults/nginx.conf
   fi
 
+  # setup cron
+  if [ -e /data/cron/dwd ]; then
+    cp /data/cron/dwd /etc/cron.hourly/
+  else
+    cp /defaults/cron/dwd /etc/cron.hourly/
+  fi
+  chmod +x /etc/cron.hourly/*
+
   # skin config: WDC
   rm -f ./skins/weewx-wdc/skin.conf
   if [ -e /data/skin-wdc/skin.conf ]; then
