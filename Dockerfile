@@ -68,7 +68,8 @@ RUN bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
   bin/wee_extension --install /tmp/weewx-purpleair.zip &&\
   bin/wee_extension --install /tmp/weewx-aqi.zip &&\
-  bin/wee_extension --install /tmp/weewx-wdc
+  bin/wee_extension --install /tmp/weewx-wdc &&\
+  mkdir "${WEEWX_HOME}/skins/weewx-wdc/dwd"
 
 COPY entrypoint.sh ./
 COPY --chown=weewx:weewx user/extensions.py ./bin/user/extensions.py
