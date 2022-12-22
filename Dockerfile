@@ -53,9 +53,9 @@ RUN wget -nv -O icons-dwd.zip "https://www.dwd.de/DE/wetter/warnungen_aktuell/ob
   unzip /tmp/warnicons-dwd.zip -d "${WEEWX_HOME}/public_html/dwd/warn_icons"
 
 # Adjust (some) file content and permissions
-RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/skins/weewx-wdc/dwd\"|g" /tmp/weewx-dwd/usr/local/bin/wget-dwd &&\
-  sed -i -z -e "s|config = configobj.ConfigObj(\"/etc/weewx/weewx.conf\")|config = configobj.ConfigObj(\"/data/weewx.conf\")|g" /tmp/weewx-dwd/usr/local/bin/dwd-warnings &&\
-  chmod +x /tmp/weewx-dwd/usr/local/bin/* &&\
+RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/skins/weewx-wdc/dwd\"|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/wget-dwd &&\
+  sed -i -z -e "s|config = configobj.ConfigObj(\"/etc/weewx/weewx.conf\")|config = configobj.ConfigObj(\"/data/weewx.conf\")|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/dwd-warnings &&\
+  chmod +x /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/* &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
 # weewx setup
@@ -101,7 +101,7 @@ RUN apt-get update -qq -y &&\
 WORKDIR ${WEEWX_HOME}
 COPY --from=install /opt/venv /opt/venv
 COPY --from=install ${WEEWX_HOME} ${WEEWX_HOME}
-COPY --from=install /tmp/weewx-dwd/usr/local/bin/* /usr/local/bin/
+COPY --from=install /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/* /usr/local/bin/
 COPY --chown=weewx:weewx defaults/ /defaults
 
 RUN mkdir /data && \
