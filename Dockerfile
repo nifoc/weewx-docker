@@ -54,7 +54,7 @@ RUN wget -nv -O icons-dwd.zip "https://www.dwd.de/DE/wetter/warnungen_aktuell/ob
 
 # Adjust (some) file content and permissions
 RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/skins/weewx-wdc/dwd\"|g" /tmp/weewx-dwd/usr/local/bin/wget-dwd &&\
-  sed -i -z -e "s|config = configobj.ConfigObj(\"/etc/weewx/weewx.conf\")|config = configobj.ConfigObj(\"/data/weewx.conf\")|g" /usr/local/bin/dwd-warnings &&\
+  sed -i -z -e "s|config = configobj.ConfigObj(\"/etc/weewx/weewx.conf\")|config = configobj.ConfigObj(\"/data/weewx.conf\")|g" /tmp/weewx-dwd/usr/local/bin/dwd-warnings &&\
   chmod +x /tmp/weewx-dwd/usr/local/bin/* &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
