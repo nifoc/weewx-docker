@@ -7,12 +7,12 @@
 # ausfuehrbar sein.
 
 /usr/local/bin/wget-dwd 2>/dev/null
-/usr/local/bin/dwd-warnings 2>/dev/null >/dev/null
+#/usr/local/bin/dwd-warnings 2>/dev/null >/dev/null
 
 # Soll statt dwd-warnings dwd-cap-warnings verwendet werden,
 # hier das Kommentarzeichen entfernen und dafuer eines vor
 # die Zeile mit dwd-warnings setzen
-/usr/local/bin/dwd-cap-warnings --config=/data/weewx.conf 2>/dev/null >/dev/null
+/usr/local/bin/dwd-cap-warnings --config=/data/weewx.conf --resolution=city 2>/dev/null >/dev/null
 
 # Fuer Wettervorhersagen XXXXX durch den Stationscode
 # ersetzen und das Kommentarzeichen entfernen.
