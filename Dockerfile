@@ -59,6 +59,7 @@ RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/s
   sed -i -z -e "s|#!/usr/bin/python3|#!/usr/bin/env python3|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/dwd-warnings &&\
   sed -i -z -e "s|#!/usr/bin/python3|#!/usr/bin/env python3|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/dwd-cap-warnings &&\
   sed -i -z -e "s|#!/usr/bin/python3|#!/usr/bin/env python3|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/dwd-mosmix &&\
+  sed -i -z -e "s|#!/usr/bin/python3|#!/usr/bin/env python3|g" /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/bbk-warnings &&\
   chmod +x /tmp/weewx-dwd/weewx-DWD-master/usr/local/bin/* &&\
   chown -R weewx:weewx ${WEEWX_HOME}
 
