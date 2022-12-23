@@ -34,6 +34,8 @@ if [ "$(id -u)" = 0 ]; then
   fi
   chmod +x /etc/cron.hourly/*
 
+  cron &
+
   # run cron tasks on startup
   /etc/cron.hourly/dwd || true
 
