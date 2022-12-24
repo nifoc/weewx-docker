@@ -6,6 +6,8 @@
 # Diese Datei ist unter /etc/cron.hourly zu speichern. Sie muss
 # ausfuehrbar sein.
 
+export PATH="/opt/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+
 /usr/local/bin/wget-dwd 2>/dev/null
 #/usr/local/bin/dwd-warnings 2>/dev/null >/dev/null
 
