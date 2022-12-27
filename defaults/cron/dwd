@@ -23,4 +23,7 @@ export PATH="/opt/venv/bin:/usr/local/bin:/usr/local/sbin:/usr/local/bin:/usr/sb
 # BBK
 /usr/local/bin/bbk-warnings --config=/data/weewx.conf 2>/dev/null >/dev/null
 
+# Radar
+/usr/bin/wget -nv -O /home/weewx/skins/weewx-wdc/dwd/radar_nrw.gif https://www.dwd.de/DWD/wetter/radar/radfilm_nrw_akt.gif 2>/dev/null >/dev/null
+
 exit 0
