@@ -2,9 +2,9 @@ FROM python:3.10.8-slim-bullseye as install
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
-ENV WEEWX_VERSION="4.10.1"
+ENV WEEWX_VERSION="4.10.2"
 ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
-ENV WEEWX_WDC_VERSION="v2.3.3"
+ENV WEEWX_WDC_VERSION="v3.0.0"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
