@@ -30,6 +30,7 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 
 # Download weewx and plugins
 RUN wget -nv -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
+  wget -nv -O weewx-mqtt.zip https://github.com/matthewwall/weewx-mqtt/archive/master.zip &&\
   wget -nv -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/refs/tags/v2.2.2.zip &&\
   wget -nv -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
   wget -nv -O weewx-GTS.zip https://github.com/roe-dl/weewx-GTS/archive/master.zip &&\
@@ -65,7 +66,8 @@ RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/s
 
 # weewx setup
 WORKDIR ${WEEWX_HOME}
-RUN bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
+RUN bin/wee_extension --install /tmp/weewx-mqtt.zip &&\ 
+  bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
   bin/wee_extension --install /tmp/weewx-GTS.zip &&\
   bin/wee_extension --install /tmp/weewx-purpleair.zip &&\
