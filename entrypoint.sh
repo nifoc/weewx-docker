@@ -41,7 +41,7 @@ if [ "$(id -u)" = 0 ]; then
   fi
 
   # skin: move dwd icons
-  mkdir /data/static_html
+  mkdir /data/static_html || true
   rm -rf /data/static_html/dwd
   cp -r ./public_html/dwd /data/static_html
   chown -R "${WEEWX_UID:-weewx}:${WEEWX_GID:-weewx}" /data/static_html
