@@ -99,7 +99,6 @@ RUN apt-get update -qq -y &&\
   gosu \
   busybox-syslogd \
   tzdata \
-  nginx-light \
   -qq -y --no-install-recommends &&\
   rm -rf /var/lib/apt/lists/*
 

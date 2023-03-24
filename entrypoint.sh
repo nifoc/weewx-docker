@@ -19,13 +19,6 @@ if [ "$(id -u)" = 0 ]; then
   # start the syslog daemon as root
   /sbin/syslogd -n -S -O - &
 
-  # start nginx
-  if [ -e /data/nginx.conf ]; then
-    nginx -c /data/nginx.conf
-  else
-    nginx -c /defaults/nginx.conf
-  fi
-
   # setup cron
   if [ -e /data/cron/dwd ]; then
     cp /data/cron/dwd /etc/cron.hourly/
@@ -46,6 +39,12 @@ if [ "$(id -u)" = 0 ]; then
   else
     ln -s /defaults/skin-wdc/skin.conf ./skins/weewx-wdc/skin.conf
   fi
+
+  # skin: move dwd icons
+  mkdir /data/static_html
+  cp -r ./public_html/dwd /data/static_html
+  chown -R "${WEEWX_UID:-weewx}:${WEEWX_GID:-weewx}" /data/static_html
+  chmod 444 /data/static_html/dwd/{icons,warn_icons}/*
 
   if [ "${WEEWX_UID:-weewx}" != 0 ]; then
     # drop privileges and restart this script
