@@ -37,7 +37,7 @@ RUN wget -nv -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/$
   wget -nv -O weewx-purpleair.zip https://github.com/xslima00/weewx-purpleair/archive/refs/heads/patch-1.zip &&\
   wget -nv -O weewx-aqi.zip https://github.com/jonathankoren/weewx-aqi/archive/refs/tags/v1.4.1.zip &&\
   wget -nv -O weewx-dwd.zip https://github.com/roe-dl/weewx-DWD/archive/master.zip &&\
-  wget -nv -O weewx-wdc.zip https://github.com/nifoc/weewx-wdc/releases/download/untagged-7ec003aedb246e1f42fa/weewx-wdc-v3.1.0-1.zip
+  wget -nv -O weewx-wdc.zip https://github.com/nifoc/weewx-wdc/releases/download/v3.1.0-1/weewx-wdc-v3.1.0-1.zip
 #wget -nv -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WEEWX_WDC_VERSION}/weewx-wdc-${WEEWX_WDC_VERSION}.zip
 
 # Extract weewx and (some) plugins
