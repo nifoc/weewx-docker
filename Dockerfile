@@ -68,7 +68,6 @@ WORKDIR ${WEEWX_HOME}
 RUN bin/wee_extension --install /tmp/weewx-mqtt.zip &&\ 
   bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
   bin/wee_extension --install /tmp/weewx-forecast.zip &&\
-  bin/wee_extension --install /tmp/weewx-GTS.zip &&\
   bin/wee_extension --install /tmp/weewx-purpleair.zip &&\
   bin/wee_extension --install /tmp/weewx-aqi.zip &&\
   bin/wee_extension --install /tmp/weewx-wdc &&\
