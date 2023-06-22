@@ -74,7 +74,7 @@ if [ "$1" = "--gen-test-config" ]; then
 fi
 
 if [ "$1" = "--shell" ]; then
-  /bin/sh
+  /bin/bash
   exit $?
 fi
 
@@ -90,4 +90,4 @@ if [ ! -f "${CONF_FILE}" ]; then
   exit 1
 fi
 
-./bin/weewxd "$@"
+exec ./bin/weewxd "$@"
