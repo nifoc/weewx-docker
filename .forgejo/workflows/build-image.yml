@@ -9,17 +9,18 @@ jobs:
     runs-on: ubuntu-latest-amd64
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Buildah
         run: apt-get -y update && apt-get -y install buildah
 
-      - name: Buildah Action
-        uses: https://github.com/redhat-actions/buildah-build@v2
-        with:
-          image: weewx
-          tags: master
-          containerfiles: |
-            ./Dockerfile
-          extra-args: |
-            --storage-driver=vfs
+      - name: Build Container
+        run: |
+          export BUILDAH_ISOLATION=chroot
+          buildah --storage-driver=vfs bud -t git.kempkens.io/daniel/weewx-docker:latest -f ./Dockerfile .
+
+      - name: Publish Container
+        run: |
+          echo "{\"auths\": {\"git.kempkens.io\": {\"auth\": \"${{ secrets.PACKAGES_AUTH_STR }}\"}}}" > $PWD/auth.json
+          buildah --storage-driver=vfs push --authfile $PWD/auth.json git.kempkens.io/daniel/weewx-docker:latest
+          rm -f $PWD/auth.json
