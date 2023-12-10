@@ -1,10 +1,10 @@
-FROM python:3.10.11-slim-bullseye as install
+FROM python:3.10.13-slim-bullseye as install
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
 ENV WEEWX_VERSION="4.10.2"
 ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
-ENV WEEWX_WDC_VERSION="v3.3.0"
+ENV WEEWX_WDC_VERSION="v3.4.0"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
@@ -82,7 +82,7 @@ COPY --chown=weewx:weewx user/extensions.py ./bin/user/extensions.py
 RUN echo 'Default Configuration:' &&\
   cat ${WEEWX_HOME}/weewx.conf
 
-FROM python:3.10.11-slim-bullseye as final
+FROM python:3.10.13-slim-bullseye as final
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
