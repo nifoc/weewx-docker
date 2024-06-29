@@ -1,10 +1,10 @@
-FROM python:3.10.13-slim-bullseye as install
+FROM python:3.12.4-slim-bookworm as install
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
-ENV WEEWX_VERSION="4.10.2"
+ENV WEEWX_VERSION="5.0.2"
 ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
-ENV WEEWX_WDC_VERSION="v3.4.0"
+ENV WEEWX_WDC_VERSION="v3.5.1"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
   && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
@@ -31,10 +31,10 @@ RUN pip install --no-cache-dir --requirement requirements.txt
 # Download weewx and plugins
 RUN wget -nv -O "${ARCHIVE}" "http://www.weewx.com/downloads/released_versions/${ARCHIVE}" &&\
   wget -nv -O weewx-mqtt.zip https://github.com/matthewwall/weewx-mqtt/archive/master.zip &&\
-  wget -nv -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/refs/tags/v2.2.2.zip &&\
-  wget -nv -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/archive/master.zip &&\
+  wget -nv -O weewx-MQTTSubscribe.zip https://github.com/bellrichm/WeeWX-MQTTSubscribe/archive/refs/tags/v2.3.1.zip &&\
+  wget -nv -O weewx-forecast.zip https://github.com/chaunceygardiner/weewx-forecast/releases/download/v3.5/weewx-forecast-3.5.zip &&\
   wget -nv -O weewx-GTS.zip https://github.com/roe-dl/weewx-GTS/archive/master.zip &&\
-  wget -nv -O weewx-purpleair.zip https://github.com/xslima00/weewx-purpleair/archive/refs/heads/patch-1.zip &&\
+  wget -nv -O weewx-purpleair.zip https://github.com/bakerkj/weewx-purpleair/archive/refs/tags/v0.9.zip &&\
   wget -nv -O weewx-aqi.zip https://github.com/jonathankoren/weewx-aqi/archive/refs/tags/v1.4.1.zip &&\
   wget -nv -O weewx-dwd.zip https://github.com/roe-dl/weewx-DWD/archive/master.zip &&\
   wget -nv -O weewx-wdc.zip https://github.com/Daveiano/weewx-wdc/releases/download/${WEEWX_WDC_VERSION}/weewx-wdc-${WEEWX_WDC_VERSION}.zip
@@ -66,13 +66,13 @@ RUN sed -i -z -e "s|PTH=\"/etc/weewx/skins/Belchertown/dwd\"|PTH=\"/home/weewx/s
 
 # weewx setup
 WORKDIR ${WEEWX_HOME}
-RUN bin/wee_extension --install /tmp/weewx-mqtt.zip &&\ 
-  bin/wee_extension --install /tmp/weewx-MQTTSubscribe.zip &&\
-  bin/wee_extension --install /tmp/weewx-forecast.zip &&\
-  bin/wee_extension --install /tmp/weewx-GTS.zip &&\
-  bin/wee_extension --install /tmp/weewx-purpleair.zip &&\
-  bin/wee_extension --install /tmp/weewx-aqi.zip &&\
-  bin/wee_extension --install /tmp/weewx-wdc &&\
+RUN bin/weectl extension install /tmp/weewx-mqtt.zip &&\ 
+  bin/weectl extension install /tmp/weewx-MQTTSubscribe.zip &&\
+  bin/weectl extension install /tmp/weewx-forecast.zip &&\
+  bin/weectl extension install /tmp/weewx-GTS.zip &&\
+  bin/weectl extension install /tmp/weewx-purpleair.zip &&\
+  bin/weectl extension install /tmp/weewx-aqi.zip &&\
+  bin/weectl extension install /tmp/weewx-wdc &&\
   mkdir "${WEEWX_HOME}/skins/weewx-wdc/dwd"
 
 COPY entrypoint.sh ./
@@ -82,7 +82,7 @@ COPY --chown=weewx:weewx user/extensions.py ./bin/user/extensions.py
 RUN echo 'Default Configuration:' &&\
   cat ${WEEWX_HOME}/weewx.conf
 
-FROM python:3.10.13-slim-bullseye as final
+FROM python:3.12.4-slim-bookworm as final
 
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
