@@ -3,7 +3,7 @@ FROM python:3.12.4-slim-bookworm as install
 ARG WEEWX_UID=421
 ENV WEEWX_HOME="/home/weewx"
 ENV WEEWX_VERSION="5.0.2"
-ENV ARCHIVE="weewx-${WEEWX_VERSION}.tar.gz"
+ENV ARCHIVE="weewx-${WEEWX_VERSION}.tgz"
 ENV WEEWX_WDC_VERSION="v3.5.1"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
