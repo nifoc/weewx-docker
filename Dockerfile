@@ -7,7 +7,8 @@ ENV ARCHIVE="weewx-${WEEWX_VERSION}.tgz"
 ENV WEEWX_WDC_VERSION="v3.5.1"
 
 RUN addgroup --system --gid ${WEEWX_UID} weewx \
-  && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx
+  && adduser --system --uid ${WEEWX_UID} --ingroup weewx weewx \
+  && mkdir -p ${WEEWX_HOME} && chown -R weewx:weewx ${WEEWX_HOME}
 
 # Install installation dependencies
 RUN apt-get update -qq -y &&\
